@@ -20,7 +20,7 @@ public class GroupService {
 
         group.setNumber(gradeNumber);
         group.setGrade(gradeRepo.
-                findByGradeEnum(GradeEnum.values()[gradeNumber-1]));
+                findByGradeEnum(GradeEnum.values()[gradeNumber]));
         groupRepo.save(group);
     }
 }

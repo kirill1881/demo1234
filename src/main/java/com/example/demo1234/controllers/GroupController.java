@@ -28,6 +28,8 @@ public class GroupController {
     @GetMapping("/create/{groupNumber}/{gradeNumber}")
     public void createGroup(@PathVariable int groupNumber,
                             @PathVariable int gradeNumber){
+        System.out.println(groupNumber);
+        System.out.println(gradeNumber);
         groupService.saveGroup(groupNumber, gradeNumber);
     }
 }

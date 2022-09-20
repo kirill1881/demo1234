@@ -1,6 +1,8 @@
 package com.example.demo1234.services;
 
+import com.example.demo1234.models.Group;
 import com.example.demo1234.models.StudentModel;
+import com.example.demo1234.models.helpers.GradeEnum;
 import com.example.demo1234.repos.GroupRepo;
 import com.example.demo1234.repos.StudentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +17,14 @@ public class StudentService {
     GroupRepo groupRepo;
 
     public void addStudent(String name, String lastName,
-                           String groupNumber){
+                           int groupNumber, int gradeNumber){
         StudentModel studentModel = new StudentModel();
         studentModel.setName(name);
         studentModel.setLastName(lastName);
-        studentModel.setGroup(groupRepo.findByNumber(groupNumber));
+        Group group = groupRepo.findByNumberAndGrade_GradeEnum(groupNumber,
+                GradeEnum.values()[gradeNumber-1]);
+        group.setStudents(group.getStudents()+1);
+        studentModel.setGroup(group);
 
         studentRepo.save(studentModel);
     }
